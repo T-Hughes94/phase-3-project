@@ -1,4 +1,5 @@
-from Models.classes import Food_Truck, Customer, Base, create_engine, create
+from Models.classes import Food_Truck, Customer, Base, Session
+from sqlalchemy import create_engine
 from helpers import (
     exit_program,
     helper_1
@@ -24,7 +25,11 @@ def menu():
 
 
 if __name__ == "__main__":
-    main()
-    
     engine = create_engine('sqlite:///food_truck.db')
     Base.metadata.create_all(engine)
+    with Session(engine) as session:
+        eazy_t = Food_Truck(name = "Eazy T's", food_type = "American Classics with Green Chili")
+        session.add(eazy_t)
+        session.commit()
+        
+    
