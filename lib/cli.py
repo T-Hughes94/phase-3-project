@@ -1,3 +1,4 @@
+from Models.classes import Food_Truck, Customer, Base, create_engine, create
 from helpers import (
     exit_program,
     helper_1
@@ -24,3 +25,6 @@ def menu():
 
 if __name__ == "__main__":
     main()
+    
+    engine = create_engine('sqlite:///food_truck.db')
+    Base.metadata.create_all(engine)
