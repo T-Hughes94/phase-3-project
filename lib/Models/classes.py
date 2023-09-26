@@ -1,5 +1,6 @@
+#This file creates the data and establishes relationships between the tables
 from sqlalchemy import Column, Integer, String,Float,ForeignKey
-from sqlalchemy.orm import Session, declarative_base, relationship
+from sqlalchemy.orm import Session, declarative_base, relationship, validates
 # from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -10,6 +11,13 @@ class Food_Truck(Base):
     id = Column(Integer, primary_key= True)
     name = Column(String)
     food_type = Column(String)
+
+    @validates("name")
+    def validate_name(self, key, name):
+        if isinstance(name, str) and len(name) > 0:
+            return name
+        else:
+            raise ValueError("Not a valid name")
 
      
     def __repr__(self):
@@ -32,9 +40,9 @@ class Order(Base):
     id = Column(Integer, primary_key= True)
     order_number = Column(Integer)
     food_truck_id = Column(Integer, ForeignKey('food_truck.id'))
-    food_truck = relationship('Food_Truck', backref= "food_trucks")
+    food_truck = relationship('Food_Truck', backref= "orders")
     customer_id = Column(Integer, ForeignKey('customer.id'))
-    customer = relationship('Customer', backref= "customers")
+    customer = relationship('Customer', backref= "orders")
 
 
 class Menu_Order(Base):
@@ -42,9 +50,10 @@ class Menu_Order(Base):
 
     id = Column(Integer, primary_key= True)
     order_id = Column(Integer, ForeignKey('order.id'))
-    order = relationship('Order', backref = "orders")
+    order = relationship('Order', backref = "menu-orders")
     menu_item_id = Column(Integer, ForeignKey('menu_item.id'))
-    menu_item = relationship('Menu_Item', backref = "menu_items")
+    menu_items = relationship('Menu_Item', backref = "menu_orders")
+    quantity = Column(Integer)
 
 
 class Menu_Item(Base):
@@ -54,6 +63,6 @@ class Menu_Item(Base):
     item = Column(String)
     description = Column(String)
     food_truck_id = Column(Integer, ForeignKey('food_truck.id'))
-    food_truck = relationship('Food_Truck', backref= "food_trucks")
-    price = Column(Integer, Float)
+    food_trucks = relationship('Food_Truck', backref= "menu_items")
+    price = Column(Float)
 

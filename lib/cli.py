@@ -1,5 +1,6 @@
-from Models.classes import Food_Truck, Customer, Base, Session
-from sqlalchemy import create_engine
+#This file is where you will use query to interact with the CLI
+# from Models.classes import Food_Truck, Customer, Base, Session
+# from sqlalchemy import create_engine
 from helpers import (
     exit_program,
     helper_1
@@ -24,7 +25,9 @@ def menu():
     print("1. Customer")
 
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
+    user = input("Please enter a name: ")
+    print(user)
    
 #     engine = create_engine('sqlite:///food_truck.db')
 #     # Food_Truck.__table__.drop(engine)
