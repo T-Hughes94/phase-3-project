@@ -1,6 +1,7 @@
 #This file is where you will use query to interact with the CLI
 # from Models.classes import Food_Truck, Customer, Base, Session
 # from sqlalchemy import create_engine
+import inquirer
 from helpers import (
     exit_program,
     helper_1
@@ -26,23 +27,13 @@ def menu():
 
 
 if __name__ == "__main__":
-    user = input("Please enter a name: ")
+    user = input("Are you a Food Truck or a Customer?:")
     print(user)
-   
-#     engine = create_engine('sqlite:///food_truck.db')
-#     # Food_Truck.__table__.drop(engine)
-#     Base.metadata.create_all(engine)
-    
-#     with Session(engine) as session:
-#         eazy_t = Food_Truck(name = "Eazy T's", food_type = "American Classics with Green Chili")
-#         luisa = Food_Truck(name = "Luisa's", food_type = "Comida de Dominicana")
-#         session.add_all([eazy_t, luisa])
-#         session.commit()
-#         # all_trucks = session.query(Food_Truck).all()
-#         # print(all_trucks)
-#         # one_truck = session.query(Food_Truck).filter(Food_Truck.id == 1).first()
-#         # print(one_truck)
-#         # session.delete(one_truck)
+    if user == "Customer" or user == 'customer':
+        print("Press 1 to view the menu")
+    if user == "Food Truck":
+        print("Press 1 to view the menu")
+
 
       
         
