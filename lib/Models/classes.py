@@ -1,7 +1,7 @@
 #This file creates the data and establishes relationships between the tables
 from sqlalchemy import Column, Integer, String,Float,ForeignKey
-from sqlalchemy.orm import Session, declarative_base, relationship, validates
-# from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base, relationship, validates
+
 
 Base = declarative_base()
 
@@ -45,7 +45,6 @@ class Order(Base):
     __tablename__ = 'order'
     #gives this table/class a unique id 
     id = Column(Integer, primary_key= True)
-   
     order_number = Column(Integer)
     
     #foreign keys to connect Food_Truck and Customer objects to the Order object
@@ -60,7 +59,6 @@ class Menu_Order(Base):
     __tablename__ = 'menu_order'
 
     id = Column(Integer, primary_key= True)
-    
     quantity = Column(Integer)
     
     order_id = Column(Integer, ForeignKey('order.id'))
@@ -74,7 +72,6 @@ class Menu_Item(Base):
     __tablename__ = 'menu_item'
 
     id = Column(Integer, primary_key= True)
-    
     item = Column(String)
     description = Column(String)
     price = Column(Float)
