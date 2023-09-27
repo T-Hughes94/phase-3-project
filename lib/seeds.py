@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 if __name__ == "__main__":
    
     engine = create_engine('sqlite:///food_truck.db')
+    
     Food_Truck.__table__.drop(engine)
     Customer.__table__.drop(engine)
     Order.__table__.drop(engine)
@@ -20,7 +21,7 @@ if __name__ == "__main__":
         #create food trucks
         truck1 = Food_Truck(name = "Eazy T's", food_type = "American & Mexican Fusion")
         truck2 = Food_Truck(name = "Taste of Santo Domingo", food_type = "Dominican")
-        truck3 = Food_Truck(name = "Baran's Hot-Dogs" , food_type = "Mediterannean")
+        truck3 = Food_Truck(name = "Baran's Hot-Dogs" , food_type = "Multi-Cultural")
         #create customers
         cust1 = Customer(name = "John")    
         cust2 = Customer(name = "Sally")
@@ -31,11 +32,11 @@ if __name__ == "__main__":
         item2 = Menu_Item(item = "Slopper", description = "Cheesburger smothered with green chili", food_trucks = truck1, price = 15)
         item3 = Menu_Item(item = "Green Chili Dog", description = "Hot dog smothered with green chili, topped with fritos and cheese", food_trucks = truck1, price = 10)
         #Food Truck 2
-        item4 = Menu_Item(item = "Mangu", description = "Mashed plantains served wtih Fried eggs & Fried Salami", food_trucks = truck2, price =12)
+        item4 = Menu_Item(item = "Mangu", description = "Mashed plantains served wtih Fried eggs & Fried Salami", food_trucks = truck2, price = 12)
         item5 = Menu_Item(item = "Habichuelas Guisadas con Carne", description = "Stewed beans on a bed of rice with choice of protein", food_trucks = truck2, price = 10)
-        item6 = Menu_Item(item = "Tostones", description = "Count of 6 twice fried plantains", food_trucks = truck2, price =10)
+        item6 = Menu_Item(item = "Tostones", description = "Count of 6 twice fried plantains", food_trucks = truck2, price = 10)
         #Food Truck 3
-        item7 = Menu_Item(item = "Sabrett Hot-Dog", description = "Its a hot dog", food_trucks = truck3, price =8)
+        item7 = Menu_Item(item = "Sabrett Hot-Dog", description = "Its a hot dog", food_trucks = truck3, price = 8)
         item8 = Menu_Item(item = "Russian Salad", description = "Mixed salad with boiled potatoes", food_trucks = truck3, price = 8)
         item9 = Menu_Item(item = "Lamb Kabob", description = "Lamb on a skewer", food_trucks = truck3, price = 10)
         #create orders
