@@ -58,34 +58,94 @@ if __name__ == "__main__":
                     food_truck_action = food_truck_answers["food_truck_action"]
 
                     if food_truck_action == "Add Menu Item":
-                        # Code to add a new menu item for the selected Food Truck
+                    # Code to add a new menu item for the selected Food Truck
                         item_name = input("Enter the item name: ")
                         item_description = input("Enter the item description: ")
-                        item_price = float(input("Enter the item price: "))
+                        item_price = float(input("Enter the item price: "))  # Convert input to float
 
+                     # Create a new menu item and associate it with the selected Food Truck
                         new_menu_item = Menu_Item(
-                        item = item_name,
-                        description = item_description,
-                        price = item_price,
-                        food_truck = selected_food_truck,
+                        item=item_name,
+                        description=item_description,
+                         price=item_price,
                         )
-
+    
+                    # Add the new menu item to the selected Food Truck's menu_items relationship
                         selected_food_truck.menu_items.append(new_menu_item)
 
+                    # Add the new menu item to the session and commit the changes
                         session.add(new_menu_item)
                         session.commit()
 
                         print(f"Menu item '{item_name}' added to {selected_food_truck.name}'s menu.")
 
                     elif food_truck_action == "Update Menu Item":
-                        pass
-                        # Code to update an existing menu item for the selected Food Truck
-                        # ...
+                        # Display the menu items of the selected Food Truck
+                        display_menu(selected_food_truck)
 
+                        # Ask the user to select a menu item to update
+                        menu_item_id = input("Enter the ID of the menu item you want to update: ")
+
+                        # Check if the selected menu item exists for the selected food truck
+                        selected_menu_item = (
+                            session.query(Menu_Item)
+                            .join(Food_Truck)
+                            .filter(Menu_Item.id == menu_item_id, Food_Truck.id == selected_food_truck.id)
+                            .first()
+                        )
+
+                        if selected_menu_item:
+                            # Get the new details for the menu item from the user
+                            new_item_name = input("Enter the new item name (leave empty to keep current): ")
+                            new_item_description = input("Enter the new item description (leave empty to keep current): ")
+                            new_item_price = input("Enter the new item price (leave empty to keep current): ")
+
+                            # Update the selected menu item with the new details
+                            if new_item_name:
+                                selected_menu_item.item = new_item_name
+                            if new_item_description:
+                                selected_menu_item.description = new_item_description
+                            if new_item_price:
+                                selected_menu_item.price = float(new_item_price)
+
+                            # Commit the changes to the database
+                            session.commit()
+
+                            print(f"Menu item {selected_menu_item.item} updated.")
+                        else:
+                            print("Invalid menu item ID. Please select a valid ID.")
+
+                    # Inside the "if food_truck_action == 'Delete Menu Item':" block
                     elif food_truck_action == "Delete Menu Item":
-                        pass
-                        # Code to delete an existing menu item for the selected Food Truck
-                        # ...
+                        # Display the menu items of the selected Food Truck
+                        display_menu(selected_food_truck)
+
+                        # Ask the user to select a menu item to delete
+                        menu_item_id = input("Enter the ID of the menu item you want to delete: ")
+
+                        # Check if the selected menu item exists for the selected food truck
+                        selected_menu_item = (
+                            session.query(Menu_Item)
+                            .join(Food_Truck)
+                            .filter(Menu_Item.id == menu_item_id, Food_Truck.id == selected_food_truck.id)
+                            .first()
+                        )
+
+                        if selected_menu_item:
+                            # Confirm the deletion with the user
+                            confirm_deletion = input(f"Are you sure you want to delete '{selected_menu_item.item}'? (yes/no): ")
+                            
+                            if confirm_deletion.lower() == "yes":
+                                # Delete the selected menu item
+                                session.delete(selected_menu_item)
+                                session.commit()
+
+                                print(f"Menu item '{selected_menu_item.item}' deleted.")
+                            else:
+                                print(f"Menu item '{selected_menu_item.item}' was not deleted.")
+                        else:
+                            print("Invalid menu item ID. Please select a valid ID.")
+
 
                     elif food_truck_action == "View Menu":
                         # Display the menu items for the selected Food Truck
@@ -112,7 +172,7 @@ if __name__ == "__main__":
         else:
             print("Invalid choice")
 
-    print("Goodbye!")
+    print("Goodluck, Chef!")
 
 
 
