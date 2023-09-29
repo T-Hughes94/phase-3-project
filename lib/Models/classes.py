@@ -79,3 +79,4 @@ class Menu_Item(Base):
     food_truck_id = Column(Integer, ForeignKey('food_truck.id'))
 
     food_trucks = relationship('Food_Truck', backref= "menu_items")
+
