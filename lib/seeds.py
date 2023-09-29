@@ -38,7 +38,7 @@ if __name__ == "__main__":
         #Food Truck 3
         item7 = Menu_Item(item = "Sabrett Hot-Dog", description = "Its a hot dog", food_trucks = truck3, price = 8)
         item8 = Menu_Item(item = "Russian Salad", description = "Mixed salad with boiled potatoes", food_trucks = truck3, price = 8)
-        item9 = Menu_Item(item = "Lamb Kabob", description = "Lamb on a skewer", food_trucks = truck3, price = 10)
+        item9 = Menu_Item(item = "Lamb Kabob", description = "Lamb kabob on a skewer", food_trucks = truck3, price = 10)
         #create orders
         #orders for first truck
         ord1 = Order(order_number = 1, food_truck = truck1, customer = cust1)

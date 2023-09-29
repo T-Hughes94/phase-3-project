@@ -472,12 +472,12 @@ if __name__ == "__main__":
 
                 while True:
                     # Ask the customer to select a menu item and specify the quantity
-                    menu_item_id = input("Enter the ID of the menu item you want to order (or 'done' to finish ordering): ")
+                    menu_item_id = input("Enter the ID of an item to make another selection (or 'done' to finish ordering): ")
 
                     if menu_item_id.lower() == 'done':
                         break
 
-                    quantity = int(input("Enter the quantity: "))
+                    quantity = int(input("How many would you like?: "))
 
                     # Find the selected menu item
                     selected_menu_item = session.query(Menu_Item).filter_by(id=menu_item_id).first()
