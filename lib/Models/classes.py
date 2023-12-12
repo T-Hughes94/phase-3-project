@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer, String,Float,ForeignKey
 from sqlalchemy.orm import declarative_base, relationship, validates
 
 
+
 Base = declarative_base()
 
 class Food_Truck(Base):

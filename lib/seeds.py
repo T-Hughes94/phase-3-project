@@ -1,7 +1,12 @@
 #this file creates the data to be used in the CLI
-from Models.classes import Food_Truck, Customer, Order, Menu_Item, Menu_Order, Base, Session
+# from Models.classes import Food_Truck, Customer, Order, Menu_Item, Menu_Order, Base, Session as ORM_Session
+# from sqlalchemy import create_engine
+# from sqlalchemy.orm import Session
+
+from Models.classes import Food_Truck, Customer, Order, Menu_Item, Menu_Order, Base
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session as ORM_Session
+
 
 
 
@@ -9,15 +14,16 @@ if __name__ == "__main__":
    
     engine = create_engine('sqlite:///food_truck.db')
     
-    Food_Truck.__table__.drop(engine)
-    Customer.__table__.drop(engine)
-    Order.__table__.drop(engine)
-    Menu_Item.__table__.drop(engine)
-    Menu_Order.__table__.drop(engine)
+    # Food_Truck.__table__.drop(engine)
+    # Customer.__table__.drop(engine)
+    # Order.__table__.drop(engine)
+    # Menu_Item.__table__.drop(engine)
+    # Menu_Order.__table__.drop(engine)
 
-    Base.metadata.create_all(engine)
+    # Base.metadata.create_all(engine)
     
-    with Session(engine) as session:
+    # with Session(engine) as session:
+    with ORM_Session(engine) as session:
         #create food trucks
         truck1 = Food_Truck(name = "Eazy T's", food_type = "American & Mexican Fusion")
         truck2 = Food_Truck(name = "Taste of Santo Domingo", food_type = "Dominican")
